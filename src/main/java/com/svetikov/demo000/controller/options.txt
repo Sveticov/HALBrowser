@@ -1,0 +1,5 @@
+C:\Users\Svetikov\curl>curl -i -X OPTIONS http://localhost:8080/ua/customers
+HTTP/1.1 200
+Allow: GET,POST,HEAD,OPTIONS,DELETE,PUT
+Content-Length: 0
+Date: Sun, 07 Oct 2018 15:15:48 GMT
