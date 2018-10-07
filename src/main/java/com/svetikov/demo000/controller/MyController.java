@@ -8,18 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @RestController
@@ -68,5 +65,13 @@ public class MyController {
         return this.repositoriCustomer.findById(id)
                 .map(customer -> ResponseEntity.ok(this.customerResourceAssemble.toResource(customer)))
                 .orElseThrow(()->new Exception());
+    }
+
+    @RequestMapping(value = "/customers",method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> options(){
+        return ResponseEntity.ok()
+                .allow(HttpMethod.GET,HttpMethod.POST,HttpMethod.HEAD,
+                        HttpMethod.OPTIONS,HttpMethod.DELETE,HttpMethod.PUT)
+                .build();
     }
 }
