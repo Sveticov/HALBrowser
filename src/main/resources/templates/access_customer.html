@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Customer</title>
+</head>
+<body ng-app="customer_task">
+<h2>customer</h2>
+<div ng-controller="customer_controller">
+    <div>
+        <button ng-click="showCustomer()">Show customer</button>
+        <p>{{cust_message}}</p>
+        <br>
+        <ul>
+            <li ng-repeat="listCust in cust_message">
+              <p>id: {{listCust.id}} name: {{listCust.name}} last name: {{listCust.lname}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+<script>
+var customer_task=angular.module('customer_task',[])
+    customer_task.controller('customer_controller',function ($scope,$http) {
+
+        $scope.showCustomer=function () {
+            $http.get('/ua/customers')
+                .success(function (data) {
+                    $scope.cust_message=data._embedded.customerList;
+                })
+        };
+    });
+</script>
+</html>

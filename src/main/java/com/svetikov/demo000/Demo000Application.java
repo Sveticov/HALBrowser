@@ -18,9 +18,9 @@ public class Demo000Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Customer customer1=new Customer(1,"d","s");
-        Customer customer2=new Customer(2,"l","s");
-        Customer customer3=new Customer(3,"di","s");
+        Customer customer1=new Customer(1,"Danil","Svetikov");
+        Customer customer2=new Customer(2,"Lena","Svetikov");
+        Customer customer3=new Customer(3,"Dilana","Svetikov");
 
         repositoriCustomer.save(customer1);
         repositoriCustomer.save(customer2);
