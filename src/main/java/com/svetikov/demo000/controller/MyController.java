@@ -1,6 +1,7 @@
 package com.svetikov.demo000.controller;
 
 import com.svetikov.demo000.component.CustomerResourceAssemble;
+import com.svetikov.demo000.exeption.CustomerNotFoundException;
 import com.svetikov.demo000.model.Customer;
 import com.svetikov.demo000.service.RepositoriCustomer;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +65,7 @@ public class MyController {
     public ResponseEntity<Resource<Customer>> get(@PathVariable Long id) throws Exception {
         return this.repositoriCustomer.findById(id)
                 .map(customer -> ResponseEntity.ok(this.customerResourceAssemble.toResource(customer)))
-                .orElseThrow(()->new Exception());
+                .orElseThrow(()->new CustomerNotFoundException("not found id: "+id));
     }
 
     @RequestMapping(value = "/customers",method = RequestMethod.OPTIONS)
